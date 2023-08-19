@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "38633b11-fe3a-4e98-9533-3041263d2746",
+		"name": "Mednet Login API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "15668553-38633b11-fe3a-4e98-9533-3041263d2746"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5b2e7d0d-37ca-4bed-bdb9-f4130b1397ea",
+						"exec": [
+							"var jsonData = JSON.parse ( responseBody ) ;\r",
+							"postman.setEnvironmentVariable (\"Token\" , jsonData.token );\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "e7275d60-6e57-4812-b9ff-2a03d45dbc2e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Token",
+						"value": "Pm9cNM4cFV1F/IttcprSlwzqywWimTiQqmEsZgSS91B7m2321dY9S6YXHS9HnR6D",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"VendorId\": \"b3hhpce7zYWIZ8r2iaKnCw==\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ProviderPortal.gig.com.jo:449/login",
+					"protocol": "https",
+					"host": [
+						"ProviderPortal",
+						"gig",
+						"com",
+						"jo"
+					],
+					"port": "449",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBenifitInsured",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b0529888-0c04-4884-8656-906861ea562b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Check benefitID value\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var expectedBenefitID = 22579;\r",
+							"    pm.expect(jsonData[0].benefitID).to.eql(expectedBenefitID, `Expected benefitID to be ${expectedBenefitID}, but got ${jsonData[0].benefitID}`);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "27465647-f57e-4140-af1e-6eb2a6196956",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ProviderType\": 3,\n    \"SpecialityCode\": 29,\n    \"ServiceId\": 79750,\n    \"PlanClassId\": 134302\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ProviderPortal.gig.com.jo:449/Mednet/GetBenifitInsured",
+					"protocol": "https",
+					"host": [
+						"ProviderPortal",
+						"gig",
+						"com",
+						"jo"
+					],
+					"port": "449",
+					"path": [
+						"Mednet",
+						"GetBenifitInsured"
+					]
+				},
+				"description": " Sample request:\r\n\r\n     Post /GetBenifitId\r\n     {\r\n        \"MemberNo\" : int;\r\n        \"NationalId\" : int;\r\n        \"DOBYear\" : int;\r\n        \"MobileNo\" : int;\r\n        \"ProviderNo\" : int;\r\n        \"ProviderSPC\" : int;\r\n        \"DiagnosisRange\" : string;\r\n        \"DiagnosisCategory\" : string;\r\n        \"DiagnosisParent\" : string;\r\n     }"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Final Price",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "83349cd4-81bf-44f6-83ea-7c361b7f86c8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check benefitID value\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    var expectedBenefitID = 22569;\r",
+							"    pm.expect(jsonData[0].benefitID).to.eql(expectedBenefitID, `Expected benefitID to be ${expectedBenefitID}, but got ${jsonData[0].benefitID}`);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "56b5dc2d-39e1-4f61-9dd1-7ba54f1bf1ce",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"ProviderType\": 2,\n        \"SpecialityCode\": 28,\n        \"ServiceId\": 26752,\n        \"PlanClassId\": 74928,\n        \"ProviderCode\": 2152,\n        \"procedureCode\": \"DR0001\",\n        \"Quantity\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ProviderPortal.gig.com.jo:449/Mednet/GetFinalPrice",
+					"protocol": "https",
+					"host": [
+						"ProviderPortal",
+						"gig",
+						"com",
+						"jo"
+					],
+					"port": "449",
+					"path": [
+						"Mednet",
+						"GetFinalPrice"
+					]
+				},
+				"description": " Sample request:\r\n\r\n     Post /GetBenifitId\r\n     {\r\n        \"MemberNo\" : int;\r\n        \"NationalId\" : int;\r\n        \"DOBYear\" : int;\r\n        \"MobileNo\" : int;\r\n        \"ProviderNo\" : int;\r\n        \"ProviderSPC\" : int;\r\n        \"DiagnosisRange\" : string;\r\n        \"DiagnosisCategory\" : string;\r\n        \"DiagnosisParent\" : string;\r\n     }"
+			},
+			"response": []
+		},
+		{
+			"name": "GetPriceList Live",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "680ce32f-7927-4921-b610-d79e7bf73148",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "0fb96045-9aa6-45e5-b2dc-0bb18f491ae0",
+			"protocolProfileBehavior": {
+				"strictSSL": false,
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ProviderCode\": \"443\",\r\n    \"procedureCode\": \"PHR2878\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://ProviderPortal.gig.com.jo:449/Mednet/GetPriceList",
+					"protocol": "https",
+					"host": [
+						"ProviderPortal",
+						"gig",
+						"com",
+						"jo"
+					],
+					"port": "449",
+					"path": [
+						"Mednet",
+						"GetPriceList"
+					]
+				},
+				"description": " Sample request:\r\n\r\n     Post /GetBenifitId\r\n     {\r\n        \"MemberNo\" : int;\r\n        \"NationalId\" : int;\r\n        \"DOBYear\" : int;\r\n        \"MobileNo\" : int;\r\n        \"ProviderNo\" : int;\r\n        \"ProviderSPC\" : int;\r\n        \"DiagnosisRange\" : string;\r\n        \"DiagnosisCategory\" : string;\r\n        \"DiagnosisParent\" : string;\r\n     }"
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "2503462e-5563-4ed6-9488-111f751f253f",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "554e684a-2d44-4ef0-9751-2144a231cc32",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
